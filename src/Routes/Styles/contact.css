@@ -1,0 +1,16 @@
+.Contact-page{
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #F8F9FD;
+    padding-top: 25px;
+}
+
+.contact-form{
+    display: flex;
+    flex-direction: column;
+}
+
+

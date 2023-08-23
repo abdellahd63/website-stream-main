@@ -8,11 +8,70 @@ export default function Service() {
     <div className='Service-page-content'>
         <h2>Service Apres Vente</h2>
         <p>Découvrez la liste des différents points SAV que Stream met à la disposition de ses Clients</p>
-    
+        
+
         <section className='cards'>
 
           <div className='section-title'>
-            <h5>SAV local</h5>
+            
+            <h4>SAV International</h4>
+            
+          </div>
+          <div className='cards-section'>
+            <div className="card">
+            <div className="icon-section">
+              <div className='icon'>
+                <img src={locationicon}/>
+              </div>
+              
+            </div>
+            <div class="info">
+              <h5>Portugal</h5>
+              <span>LetMeRepair Spain Sucursal Portugal Parque Industrial do Cotai Av. Salgueiro Maia n 1025 Armazem 5, Aboboda</span>
+              <hr/>
+              <h6>+351 211 309 453</h6>
+            </div>
+          </div>  
+          <div className="card">
+            <div className="icon-section">
+              <div className='icon'>
+                <img src={locationicon}/>
+              </div>
+              
+            </div>
+            <div class="info">
+              <h5>Espqgne</h5>
+              <span>C/Conrado del Campo, Nave 4, Pol. Ind. Trevenez, 29590, Malaga (Malaga)</span>
+              <hr/>
+              <h6>+34 952 179 479</h6>
+            </div>
+          </div>  
+
+          <div className="card">
+            <div className="icon-section">
+              <div className='icon'>
+                <img src={locationicon}/>
+              </div>
+              
+            </div>
+            <div class="info">
+              <h5>Italy</h5>
+              <span>inspeedy S.R.L via lodovico settala 3 20124 Milano (MI) - IT</span>
+              <hr/>
+              <h6>+39 199 240 668</h6>
+            </div>
+          </div>  
+
+          </div>
+           
+        </section>
+
+        <section className='cards'>
+
+          <div className='section-title'>
+            
+            <h4>SAV Local</h4>
+            
           </div>
           <div className='cards-section'>
             <div className="card">
