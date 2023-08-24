@@ -1,4 +1,5 @@
 const Panne = require('../models/PannesModel');
+const validator = require('validator');
 
 class PanneController {
   static async index(req, res) {
@@ -58,12 +59,25 @@ class PanneController {
     // Handle request to create a new Panne
     const { Nom, Prenom, Email, Telephone, 
         ReferanceProduit, TypePanne, Wilaya, 
-        CentreDepot, DateDepot, progrès} = req.body;
+        CentreDepot, DateDepot} = req.body;
     try {
+        // validation
+        if(!Nom || !Prenom || !Email || !Telephone || !ReferanceProduit 
+          || !TypePanne || !Wilaya || !CentreDepot || !DateDepot 
+          || validator.isEmpty(Nom) || validator.isEmpty(Prenom) || validator.isEmpty(Email) 
+          || validator.isEmpty(Telephone) || validator.isEmpty(ReferanceProduit) || validator.isEmpty(TypePanne) 
+          || validator.isEmpty(Wilaya) || validator.isEmpty(CentreDepot) || validator.isEmpty(DateDepot)){
+          return res
+            .status(400)
+            .json({ message: "Tous les champs doivent être remplis" });
+        }
+        if(!validator.isEmail(Email)){
+            return res.status(400).json({message: "L'email n'est pas valide"});
+        }
         const newPanne = await Panne.create({ Nom, Prenom, Email, Telephone, 
             ReferanceProduit, TypePanne, Wilaya, 
             CentreDepot, DateDepot });
-        res.json(newPanne);
+        res.status(200).json({message: 'Panne created successfully'});
     } catch (error) {
         console.error(error);
         res.status(500).send('Error creating panne');

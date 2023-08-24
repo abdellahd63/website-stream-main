@@ -2,10 +2,15 @@ import '../Form/FormInput.css'
 import React from 'react'
 
 const CostumSelect = (props) => {
+  const handleChange = (event) => {
+    if (props.onChange) {
+      props.onChange(event.target.value);
+    }
+  };
   return (
     <div className='forminput'>
       <label>{props.label}</label>
-      <select>
+      <select onChange={handleChange}>
         <option>Adrar</option>
         <option>Chlef</option>
         <option>Aghouat</option>
