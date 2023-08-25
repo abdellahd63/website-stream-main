@@ -6,6 +6,7 @@
     min-height: 100vh;
     background-color: #F8F9FD;
     padding-top: 25px;
+    overflow: hidden;
 }
 
 .contact-form{
