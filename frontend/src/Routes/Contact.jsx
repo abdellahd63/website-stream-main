@@ -1,6 +1,6 @@
 import React from 'react'
 import './Styles/contact.css'
-import FormInput from './Form/FormInput'
+import Contactforminput from './Form/Contactforminput'
 
 export default function Contact (){
   return (
@@ -9,16 +9,22 @@ export default function Contact (){
         <p>Contactez-nous dès aujourd'hui et nous serons ravis de traiter votre demande</p>
 
         <div className='contact-form'>
-          <div className=''>
-          
-            <FormInput label='Nom complet:' placeholder=' Entrer votre nom' type='text'/>
-            <FormInput label='Email:' placeholder=' Entrer votre Email' type='email'/>
-            <FormInput label='N tel:' placeholder=' Entrer votre numero' type='number'/>
+          <div className='first-section'>
+            <Contactforminput label='Nom complet:' placeholder=' Entrer votre nom' type='text' width='50VH'/>
+            <Contactforminput label='Email:' placeholder=' Entrer votre Email' type='email' width='50VH'/>
+            <Contactforminput label='N tel:' placeholder=' Entrer votre numero' type='number' width='50VH'/>
           </div> 
-           <div className='description'>
-            <label>Description</label>
-            <input placeholder='Décrivez votre problème en au moins 250 caractères' maxLength={250} type='text'/>
+           <div className='second-section'>
+            <label>Message:</label>
+           <textarea  placeholder=' Entrer votre message' type='text' width='max-content'>
 
+           </textarea>
+          </div>
+
+          <div className="buttons-area">
+
+                    <button id='cancel_button' type='button'>Annuler</button>
+                    <button id='submit_button' type='submit'>Envoyer</button>
           </div>
         </div>
     </div>

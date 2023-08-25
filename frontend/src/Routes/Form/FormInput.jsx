@@ -1,4 +1,4 @@
-import '../Form/FormInput.css'
+import '../Form/style/FormInput.css'
 import React from 'react'
 
 
