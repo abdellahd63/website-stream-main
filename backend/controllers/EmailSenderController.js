@@ -1,7 +1,20 @@
 const nodemailer = require("nodemailer");
+const validator = require('validator');
+
 const SendEmail = async (req, res) => {
     const { fromAddress, FullName, PhoneNumber, EmailDescription } = req.body;
     try{
+        if(!fromAddress || !FullName || !PhoneNumber || !EmailDescription 
+            || validator.isEmpty(fromAddress) || validator.isEmpty(FullName) || validator.isEmpty(PhoneNumber) 
+            || validator.isEmpty(EmailDescription)){
+            return res
+              .status(400)
+              .json({ message: "Tous les champs doivent être remplis" });
+        }
+        if(!validator.isEmail(fromAddress)){
+            return res.status(400).json({message: "L'email n'est pas valide"});
+        }
+          
         let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com", 
         port: 465, 
