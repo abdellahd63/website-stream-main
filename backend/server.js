@@ -6,6 +6,7 @@ const cors = require('cors');
 const body = require('body-parser');
 const sequelize = require('./config/database');
 const PannesRoute = require('./routes/PannesRoute');
+const EmailSenderRoute = require('./routes/EmailSenderRoute');
 
 const port = process.env.PORT || 8080;
 
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use('/Pannes', PannesRoute);
+app.use('/EmailSender', EmailSenderRoute);
 
 //connect to db
 sequelize

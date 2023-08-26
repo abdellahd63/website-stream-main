@@ -1,6 +1,6 @@
 import React from 'react'
 import './Styles/contact.css'
-import Contactforminput from './Form/Contactforminput'
+import Contactforminput from './Form/contactforminput'
 
 export default function Contact (){
   return (
