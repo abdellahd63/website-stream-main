@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import './Styles/OpenTicket.css'
 import FormInput from './Form/FormInput'
 import CostumSelect from './Form/CostumSelect'
-import axios from 'axios'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const Openticket = () => {
@@ -45,7 +44,52 @@ const Openticket = () => {
     const handleDateDepotInputChange = (newValue) => {
         setDateDepot(newValue);
     };
-    const [pannes, setPannes] = useState([]);
+    const createAndDownloadPdf = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/EmailGenerator/createPDF', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    Nom,
+                    Prenom,
+                    Email,
+                    Telephone,
+                    ReferanceProduit,
+                    TypePanne,
+                    Wilaya,
+                    CentreDepot,
+                    DateDepot
+                })
+            });
+    
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const uniqueFilename = await response.text();
+    
+            const pdfResponse = await fetch(`http://localhost:8000/EmailGenerator/fetchPDF?filename=${uniqueFilename}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/pdf'
+                }
+            });
+    
+            if (!pdfResponse.ok) {
+                throw new Error('Network response was not ok');
+            }
+    
+            const pdfBlob = await pdfResponse.blob();
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(pdfBlob);
+            link.download = 'newPdf.pdf';
+            link.click();
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
+    }
     async function handleCreateNewPanne(e) {
         e.preventDefault();
         const reponse = await fetch("http://localhost:8000/Pannes", {
@@ -66,9 +110,11 @@ const Openticket = () => {
             notifyFailed(json.message);
           }
           if (reponse.ok) {
+            createAndDownloadPdf();
             notifySuccess(json.message);
           }
     };
+    
   return (
     <div className='form'>
         
