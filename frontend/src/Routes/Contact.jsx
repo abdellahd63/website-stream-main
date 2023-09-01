@@ -56,15 +56,33 @@ export default function Contact (){
         <p>Contactez-nous dès aujourd'hui et nous serons ravis de traiter votre demande</p>
 
         <div className='contact-form'>
+
+
           <div className='first-section'>
             <Contactforminput onChange={handleFullNameInputChange} label='Nom complet:' value= {FullName} placeholder=' Entrer votre nom' type='text' width='50VH'/>
             <Contactforminput onChange={handlefromAddressInputChange} label='Email:' value={fromAddress} placeholder=' Entrer votre Email' type='email' width='50VH'/>
             <Contactforminput onChange={handlePhoneNumberInputChange} label='N tel:' value={PhoneNumber} placeholder=' Entrer votre numero' type='number' width='50VH'/>
           </div> 
+
+          <div className='typesection'>
+            <div className='Message-type-select'>
+              <label>Type de Message :</label>
+              <select >
+                <option>Aide et Guide</option>
+                <option>Reclamation</option>
+                <option>Autres</option>
+
+              </select>
+            </div>
+            </div>
+
            <div className='second-section'>
-            <label>Message:</label>
-           <textarea onChange={e => (setEmailDescription(e.target.value))} value={EmailDescription}  placeholder=' Entrer votre message' type='text' width='max-content'>
+            <div className='contact--input'>
+              <label>Message:</label>
+              <textarea onChange={e => (setEmailDescription(e.target.value))} value={EmailDescription}  placeholder=' Entrer votre message' type='text' width='max-content'>
            </textarea>
+            </div>
+            
           </div>
 
           <div className="buttons-area">

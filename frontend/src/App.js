@@ -20,7 +20,7 @@ function App() {
         </React.Fragment>
         
         <Routes>
-          <Route path="/" element={<Home />}/> 
+          <Route path="/" element={<Home/>}/> 
           <Route path='/Services' element={< Service />}/>
           <Route path='/Help' element={<Guide/>}/>
           <Route path='/Contact' element={<Contact/>}/>

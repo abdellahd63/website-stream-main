@@ -16,8 +16,11 @@ function MyNavBar(){
 
   return (
     <header className='navbar'>
-        <img src={Logo} alt="logo" height={90}/>
-
+        <a>
+          <Link to="/">
+            <img src={Logo} alt="logo" height={90}/>
+          </Link>
+        </a>
          <nav className='nav-menu' ref={NavRef}>
             <a><Link to="/">Acceuil</Link></a>
 

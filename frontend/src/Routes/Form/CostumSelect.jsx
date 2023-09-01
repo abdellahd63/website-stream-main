@@ -21,6 +21,7 @@ const CostumSelect = (props) => {
         <option>Blida</option>
         <option>Bouira</option>
         <option>Tamenraset</option>
+        <option>Medea</option>
       </select>
     </div>
     
