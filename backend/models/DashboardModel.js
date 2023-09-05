@@ -24,6 +24,10 @@ const statistic = sequelize.define('statistics', {
     type: DataTypes.BIGINT,
     allowNull: true,
   },
+  EnAttenteDePickup: {
+    type: DataTypes.BIGINT,
+    allowNull: true,
+  },
   Produitlivre: {
     type: DataTypes.BIGINT,
     allowNull: true,

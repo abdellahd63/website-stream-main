@@ -28,6 +28,10 @@ const StatisticCentre = sequelize.define('statisticscentres', {
     type: DataTypes.BIGINT,
     allowNull: true,
   },
+  EnAttenteDePickup: {
+    type: DataTypes.BIGINT,
+    allowNull: true,
+  },
   Produitlivre: {
     type: DataTypes.BIGINT,
     allowNull: true,
