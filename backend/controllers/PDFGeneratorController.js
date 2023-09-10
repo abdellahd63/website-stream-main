@@ -6,7 +6,7 @@ const path = require('path');
 const PDFGenerator = async (req, res) => {
     try {
         const uniqueFilename = `${uuidv4()}.pdf`;
-        const filePath = path.join(__dirname, uniqueFilename); // Use the correct path
+        const filePath = path.join(__dirname, '..', 'files', uniqueFilename); // Use the correct path
         pdf.create(pdfTemplate(req.body), {}).toFile(filePath, (err) => {
             if (err) {
                 console.log(err);
@@ -28,7 +28,7 @@ const PDFSender = async (req, res) => {
             return res.status(400).send("Filename parameter missing");
         }
 
-        const filePath = path.join(__dirname, filename); // Use the correct path
+        const filePath = path.join(__dirname, '..', 'files', filename); // Use the correct path
         res.sendFile(filePath);
     } catch (err) {
         console.log(err);

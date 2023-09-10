@@ -44,12 +44,23 @@ const Panne = sequelize.define('pannes', {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  progres: {
+  FinReparation:{
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  Description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  Progres: {
     type: DataTypes.INTEGER,
     allowNull: true,
     defaultValue: 0,
   },
-  
+  image: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
 },{
   timestamps: true,
 });

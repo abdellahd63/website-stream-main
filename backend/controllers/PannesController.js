@@ -95,12 +95,14 @@ class PanneController {
               // create dashboard
               const newDashboard = await Dashboard.create({
                 ProduitEnAttente: 1,
+                NbTicketsOuverts: 1,
               });
               await newDashboard.save().then(async () => {
                 // create statistics
                 const newStatistics = await StatisticsCentre.create({
                   Centre: CentreDepot,
                   ProduitEnAttente: 1,
+                  NbTicketsOuverts: 1,
                 });
                 await newStatistics.save();
                 return res.status(200).json({message: 'Panne created successfully'});
@@ -113,10 +115,12 @@ class PanneController {
               const newStatistics = await StatisticsCentre.create({
                 Centre: CentreDepot,
                 ProduitEnAttente: 1,
+                NbTicketsOuverts: 1,
               });
               await newStatistics.save().then(async () => {
                 // update dashboard
-                dashboard.ProduitEnAttente += 1;          
+                dashboard.ProduitEnAttente += 1;
+                dashboard.NbTicketsOuverts += 1;          
                 await dashboard.save();
                 console.log("Dashboard updated successfully");
                 return res.status(200).json({message: 'Panne created successfully'});         
@@ -126,12 +130,14 @@ class PanneController {
             }
             if(dashboard && statistics){
               // update dashboard
-              dashboard.ProduitEnAttente += 1;          
+              dashboard.ProduitEnAttente += 1;  
+              dashboard.NbTicketsOuverts += 1;        
               await dashboard.save().then(async () => {
                 // update statistics where centre = CentreDepot
                 await StatisticsCentre.update(
                   {
                     ProduitEnAttente:  statistics.ProduitEnAttente + 1,
+                    NbTicketsOuverts: statistics.NbTicketsOuverts + 1,
                   },
                   {
                     where: {
@@ -154,11 +160,6 @@ class PanneController {
         res.status(500).send('Error creating panne');
     }
   }
-
-  static async Update(req, res) {
-    // Handle request to update a Panne
-  }
-
   static async Remove(req, res) {
     // Handle request to delete a Panne
     const { id } = req.params;
