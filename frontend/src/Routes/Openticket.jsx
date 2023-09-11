@@ -4,6 +4,8 @@ import FormInput from './Form/FormInput'
 import CostumSelect from './Form/CostumSelect'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PanneSelect from './Form/PanneSelect';
+import SavSelect from './Form/SavSelect';
 const Openticket = () => {
     const notifyFailed = (message) => toast.error(message);
     const notifySuccess = (message) => toast.success(message);
@@ -129,9 +131,9 @@ const Openticket = () => {
                 <FormInput label='Referance produit :' placeholder=' Entrer la referance de votre produit' type='text' onChange={handleReferanceProduitInputChange}/>  
             </div>
             <div className='right-form'>
-                <FormInput label='Type de panne :' placeholder=' Entrer le type de panne' type='text' onChange={handleTypePanneInputChange}/>
+                <PanneSelect label='Type de panne :' placeholder=' Entrer le type de panne' type='text' onChange={handleTypePanneInputChange}/>
                 <CostumSelect label='Wilaya :' onChange={handleWilayaInputChange}/>
-                <FormInput label='Centre De Depot :' placeholder=' Entrer votre centre de depot' type='text' onChange={handleCentreDepotInputChange}/>
+                <SavSelect label='Centre De Depot :' placeholder=' Entrer votre centre de depot' type='text' onChange={handleCentreDepotInputChange}/>
                 <FormInput label='Date de depot :' placeholder=' Entrer votre date de depot' type='date' onChange={handleDateDepotInputChange}/>     
                 <div className='button-section'>
                     <button id='cancel_button' type='button'>Annuler</button>
