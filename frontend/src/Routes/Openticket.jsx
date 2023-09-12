@@ -5,6 +5,7 @@ import CostumSelect from './Form/CostumSelect'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PanneSelect from './Form/PanneSelect';
+import ProductSelect from './Form/ProductRefSelect';
 import SavSelect from './Form/SavSelect';
 const Openticket = () => {
     const notifyFailed = (message) => toast.error(message);
@@ -128,7 +129,7 @@ const Openticket = () => {
                 <FormInput label='Prenom :' placeholder=' Entrer votre prenom' type='text' onChange={handlePrenomInputChange}/>
                 <FormInput label='Email :' placeholder=' Entrer votre Email' type='text' onChange={handleEmailInputChange}/>
                 <FormInput label='N°= Tel :' placeholder=' Entrer votre numero telephone' type='number' onChange={handleTelephoneInputChange}/>
-                <FormInput label='Referance produit :' placeholder=' Entrer la referance de votre produit' type='text' onChange={handleReferanceProduitInputChange}/>  
+                <ProductSelect label='Referance produit :' placeholder=' Entrer la referance de votre produit' type='text' onChange={handleReferanceProduitInputChange}/>  
             </div>
             <div className='right-form'>
                 <PanneSelect label='Type de panne :' placeholder=' Entrer le type de panne' type='text' onChange={handleTypePanneInputChange}/>

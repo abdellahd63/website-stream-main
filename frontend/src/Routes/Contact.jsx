@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Styles/contact.css'
-import Contactforminput from './Form/contactforminput'
+import Contactforminput from './Form/Contactforminput'
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function Contact (){

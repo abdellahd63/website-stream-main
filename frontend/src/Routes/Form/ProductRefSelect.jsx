@@ -1,17 +1,17 @@
 import '../Form/style/FormInput.css'
 import React, { useEffect, useState } from 'react'
 
-const SavSelect = (props) => {
+const ProductSelect = (props) => {
   const handleChange = (event) => {
     if (props.onChange) {
       props.onChange(event.target.value);
     }
   };
-  const [SAV, setSAV] = useState([]);
+  const [products, setProducts] = useState([]);
   useEffect(() => {
-    const fetchSAVData = async () => {
+    const fetchProductData = async () => {
       try {
-        const response = await fetch('http://localhost:8000/Agent', {
+        const response = await fetch('http://localhost:8000/Product', {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -20,7 +20,7 @@ const SavSelect = (props) => {
   
         if (response.ok) {
           const data = await response.json();
-          setSAV(data);
+          setProducts(data);
         } else {
           console.error("Error receiving Panne data:", response.statusText);
         }
@@ -29,25 +29,24 @@ const SavSelect = (props) => {
       }
     };
   
-    fetchSAVData();
-  }, [SAV]);
+    fetchProductData();
+  }, [products]);
   return (
     <div className='forminput'>
       <label>{props.label}</label>
       <select onChange={handleChange}>
         <option value=''>
-            Sélectionné le centre de depot
+            Sélectionné votre produit
         </option>
-        {SAV.map((sav) => (
-            <option key={sav?.id} value={sav?.Region}>
-                {sav?.Region}
+        {products.map((product) => (
+            <option key={product?.id} value={product?.ReferanceProduit}>
+                {product?.ReferanceProduit}
             </option>
         ))}        
-
       </select>
     </div>
     
   )
 }
 
-export default SavSelect
+export default ProductSelect

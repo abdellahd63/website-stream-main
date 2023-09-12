@@ -8,6 +8,10 @@ const sequelize = require('./config/database');
 const PannesRoute = require('./routes/PannesRoute');
 const EmailSenderRoute = require('./routes/EmailSenderRoute');
 const PDFGeneratorRoute = require('./routes/PDFGeneratorRoute');
+const ProductRoute = require('./routes/Product');
+const SAVRoute = require('./routes/ServiceApresVente');
+const AgentRoute = require('./routes/AgentAgree');
+const WillayaRoute = require('./routes/wilayaOfAlgeria');
 
 const port = process.env.PORT || 8080;
 
@@ -27,6 +31,12 @@ app.use((req, res, next) => {
 app.use('/Pannes', PannesRoute);
 app.use('/EmailSender', EmailSenderRoute);
 app.use('/EmailGenerator', PDFGeneratorRoute);
+app.use('/Product', ProductRoute);
+app.use('/SAV', SAVRoute);
+app.use('/Agent', AgentRoute);
+app.use('/Willaya', WillayaRoute);
+
+
 
 //connect to db
 sequelize

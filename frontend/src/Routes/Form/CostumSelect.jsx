@@ -1,5 +1,5 @@
 import '../Form/style/FormInput.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const CostumSelect = (props) => {
   const handleChange = (event) => {
@@ -7,21 +7,40 @@ const CostumSelect = (props) => {
       props.onChange(event.target.value);
     }
   };
+  const [Willaya, setWillaya] = useState([]);
+  useEffect(() => {
+    const fetchWillayaData = async () => {
+      try {
+        const response = await fetch('http://localhost:8000/Willaya', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          setWillaya(data);
+        } else {
+          console.error("Error receiving Panne data:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching Panne data:", error);
+      }
+    };
+  
+    fetchWillayaData();
+  }, [Willaya]);
   return (
     <div className='forminput'>
       <label>{props.label}</label>
       <select onChange={handleChange}>
-        <option>Adrar</option>
-        <option>Chlef</option>
-        <option>Aghouat</option>
-        <option>Oum bouaghi</option>
-        <option>Batna</option>
-        <option>Biskra</option>
-        <option>Bashar</option>
-        <option>Blida</option>
-        <option>Bouira</option>
-        <option>Tamenraset</option>
-        <option>Medea</option>
+        <option value=''>Sélectionné votre willaya</option>
+        {Willaya.map((willaya) => (
+            <option key={willaya?.id} value={willaya?.Nom}>
+                {willaya?.Nom}
+            </option>
+        ))}     
       </select>
     </div>
     
