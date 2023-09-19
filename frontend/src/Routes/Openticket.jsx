@@ -7,6 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 import PanneSelect from './Form/PanneSelect';
 import ProductSelect from './Form/ProductRefSelect';
 import SavSelect from './Form/SavSelect';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
+import {useNavigate} from 'react-router-dom';
+
 const Openticket = () => {
     const notifyFailed = (message) => toast.error(message);
     const notifySuccess = (message) => toast.success(message);
@@ -19,6 +27,16 @@ const Openticket = () => {
     const [Wilaya, setWilaya] = useState('');
     const [CentreDepot, setCentreDepot] = useState('');
     const [DateDepot, setDateDepot] = useState('');
+    const [open,setOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    }; 
 
     const handleNomInputChange = (newValue) => {
         setNom(newValue);
@@ -93,7 +111,7 @@ const Openticket = () => {
             console.error('Fetch error:', error);
         }
     }
-    async function handleCreateNewPanne(e) {
+    async function handleCreateNewPanneWithPDF(e) {
         e.preventDefault();
         const reponse = await fetch("http://localhost:8000/Pannes", {
             method: "POST",
@@ -110,20 +128,49 @@ const Openticket = () => {
       
           const json = await reponse.json();
           if (!reponse.ok) {
-            notifyFailed(json.message);
+              handleClose();
+              notifyFailed(json.message);
           }
           if (reponse.ok) {
             createAndDownloadPdf();
+            handleClose();
             notifySuccess(json.message);
           }
     };
-    
+    async function handleCreateNewPanneNoPDF(e) {
+        e.preventDefault();
+        const reponse = await fetch("http://localhost:8000/Pannes", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+                Nom, Prenom, Email, Telephone, 
+                ReferanceProduit, TypePanne, Wilaya, 
+                CentreDepot, DateDepot
+            }),
+          });
+      
+          const json = await reponse.json();
+          if (!reponse.ok) {
+              handleClose();
+              notifyFailed(json.message);
+          }
+          if (reponse.ok) {
+            handleClose();
+            notifySuccess(json.message);
+          }
+    };
+    const handleOnback = () => {
+        navigate('/')
+    }
   return (
     <div className='form'>
-        
+
         <h2>Ouvrir un ticket</h2>
         <p>Veuillez remplir ce formulaire</p>
-        <form onSubmit={handleCreateNewPanne}>
+        <form>
             <div className='left-form'>
                 <FormInput label='Nom :' placeholder=' Entrer votre nom' type='text' onChange={handleNomInputChange}/>
                 <FormInput label='Prenom :' placeholder=' Entrer votre prenom' type='text' onChange={handlePrenomInputChange}/>
@@ -137,12 +184,32 @@ const Openticket = () => {
                 <SavSelect label='Centre De Depot :' placeholder=' Entrer votre centre de depot' type='text' onChange={handleCentreDepotInputChange}/>
                 <FormInput label='Date de depot :' placeholder=' Entrer votre date de depot' type='date' onChange={handleDateDepotInputChange}/>     
                 <div className='button-section'>
-                    <button id='cancel_button' type='button'>Annuler</button>
-                    <button id='submit_button' type='submit'>Valider</button>
+                    <button id='cancel_button' type='button' onClick={handleOnback}>Annuler</button>
+                    <button id='submit_button' type='button' onClick={handleClickOpen}>Valider</button>
                 </div>
             </div> 
             
         </form>
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">
+                {`Souhaitez-vous télécharger le bon de dépôt ?`}
+            </DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    En cliquant sur 'Oui', le bon de dépôt sera téléchargé automatiquement.                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleCreateNewPanneNoPDF}>Non</Button>
+                <Button onClick={handleCreateNewPanneWithPDF} autoFocus>
+                    Oui
+                </Button>
+            </DialogActions>
+        </Dialog>
         <ToastContainer />
     </div>
   )
